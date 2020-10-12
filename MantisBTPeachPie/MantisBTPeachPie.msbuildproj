@@ -6,19 +6,17 @@
     <NoWarn>PHP0125</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Compile
-      Include="**/*.php;**/*.phar;lang/*.txt"
-      Exclude="**/tests/**;plugins/MantisCoreFormatting/**"
-    />
+    <Compile Include="**/*.php;**/*.phar;lang/*.txt" Exclude="**/tests/**;plugins/MantisCoreFormatting/**" />
   </ItemGroup>
   <ItemGroup>
-    <Content
-      Include="css/**;js/**;fonts/**;images/**;"
-      CopyToOutputDirectory="PreserveNewest">
+    <Content Include="css/**;js/**;fonts/**;images/**;" CopyToOutputDirectory="PreserveNewest">
       <PackagePath>contentFiles/any/$(TargetFramework)/mantisbt/</PackagePath>
       <Link>mantisbt\%(Identity)</Link>
       <PackageCopyToOutput>true</PackageCopyToOutput>
       <CopyToPublishDirectory>true</CopyToPublishDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="css\status_config.php" />
   </ItemGroup>
 </Project>
