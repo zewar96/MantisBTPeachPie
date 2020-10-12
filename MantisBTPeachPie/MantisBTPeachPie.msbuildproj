@@ -1,33 +1,24 @@
-<Project Sdk="Peachpie.NET.Sdk/1.0.0-preview1">
+﻿<Project Sdk="Peachpie.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>MantisBTPeachPie</AssemblyName>
+    <NoWarn>PHP0125</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="**/*.php;**/*.phar" />
+    <Compile
+      Include="**/*.php;**/*.phar;lang/*.txt"
+      Exclude="**/tests/**;plugins/MantisCoreFormatting/**"
+    />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="**" Exclude="obj/**;bin/**;PublishProfiles/**;@(Compile);$(MsBuildThisFile)">
-      <PackagePath>contentFiles/any/netcoreapp3.0/wwwroot/</PackagePath>
+    <Content
+      Include="css/**;js/**;fonts/**;images/**;"
+      CopyToOutputDirectory="PreserveNewest">
+      <PackagePath>contentFiles/any/$(TargetFramework)/mantisbt/</PackagePath>
+      <Link>mantisbt\%(Identity)</Link>
       <PackageCopyToOutput>true</PackageCopyToOutput>
-      <CopyToOutputDirectory>true</CopyToOutputDirectory>
       <CopyToPublishDirectory>true</CopyToPublishDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="plugins\MantisCoreFormatting\tests\MarkdownTest.php" />
-    <Content Remove="tests\Mantis\AllTests.php" />
-    <Content Remove="tests\Mantis\MantisCoreBase.php" />
-    <Content Remove="tests\rest\AllTests.php.txt" />
-    <Content Remove="tests\rest\RestBase.php" />
-    <Content Remove="tests\soap\AllTests.php" />
-    <Content Remove="tests\soap\SoapBase.php" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="plugins\MantisCoreFormatting\Parsedown.php" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="tests\rest\AllTests.php.txt" />
   </ItemGroup>
 </Project>

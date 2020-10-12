@@ -1,4 +1,4 @@
-/*<?php*/
+<?php
 # Mantis - a php based bugtracking system
 
 # Mantis is free software: you can redistribute it and/or modify

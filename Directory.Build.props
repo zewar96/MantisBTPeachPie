@@ -1,0 +1,22 @@
+<Project>
+
+  <!-- $(PeachpieVersion) property from the current Peachpie.NET.Sdk -->
+  <Import Project="Version.props" Sdk="Peachpie.NET.Sdk" Condition=" '$(PeachpieVersion)'=='' " />
+
+  <PropertyGroup>
+
+    <LangVersion>latest</LangVersion>
+
+    <!-- metadata generation -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+  </PropertyGroup>
+
+  <!-- package -->
+  <PropertyGroup>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/zewar96/MantisBTPeachPie</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/zewar96/MantisBTPeachPie</PackageProjectUrl>
+  </PropertyGroup>
+
+</Project>

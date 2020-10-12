@@ -1,8 +1,10 @@
 using System;
+using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
 namespace MantisBTPeachPie.Server
@@ -38,6 +40,25 @@ namespace MantisBTPeachPie.Server
             });
         }
 
+        static string ResolvePhpRoot(IWebHostEnvironment env)
+        {
+            const string prefix = "mantisbt"; // our directory name for mantisBT content files
+
+            if (env.IsDevelopment())
+            {
+                // use local files when development
+                // ../MantisBTPeachpie/
+                var path = Path.GetFullPath(Path.Combine(env.ContentRootPath, "../MantisBTPeachpie"));
+                if (Directory.Exists(path))
+                {
+                    return path;
+                }
+            }
+
+            // default
+            return Path.Combine(env.ContentRootPath, prefix);
+        }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -47,7 +68,10 @@ namespace MantisBTPeachPie.Server
 
             app.UseSession();
 
-            app.UsePhp();
+            var phproot = ResolvePhpRoot(env);
+            app.UsePhp(default, rootPath: phproot);
+            app.UseStaticFiles(new StaticFileOptions { FileProvider = new PhysicalFileProvider(phproot), });
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
         }
